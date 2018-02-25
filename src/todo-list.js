@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import TodoTitle from './todo-title';
 import Task from './task';
+import TextInput from './text-input-component'
+import ButtonComponent from './button-component'
 
 class TodoList extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
 			todoList : [
-			"1 ",
-			"2",
-			"3"
-			]	
+			
+			],
+			todoTask:""
 		}
 		
 	}
@@ -18,15 +19,30 @@ class TodoList extends Component {
 	deleteListItem(index){
 		
 		var newList = this.state.todoList.filter((item,i) => {
-			console.log(i,index)
+			
 			return i !== index;
 		})
-		console.log(newList)
+		
 		this.setState({todoList:newList});
+	}
+
+	 handleTaskInput(e){
+		this.setState ({
+ 		todoTask:e.target.value
+ 		})
+	}
+
+	handleAddTask(){
+//debugger		
+		var newTaskArray = this.state.todoList//.push(this.state.todoTask)
+newTaskArray.push(this.state.todoTask)
+		this.setState ({
+ 			todoList:newTaskArray
+ 		})
 	}
   
   render() {
-
+    console.log("todoList", this.state.todoList)
   	const todoListItems = this.state.todoList.map((item , index) => {
   		return  <Task key={index} data={index} label={item} handleDelete={this.deleteListItem.bind(this)}></Task>
   	})
@@ -34,6 +50,8 @@ class TodoList extends Component {
     return (
       <React.Fragment>
       	<TodoTitle/>
+      	<TextInput todoTask={this.state.todoTask} handleTaskInput={(e) => {this.handleTaskInput(e)}}/>
+      	<ButtonComponent label="ADD TASK" handleClick={() => this.handleAddTask()}/>
       	<ul>
       		{todoListItems}
       	</ul>
