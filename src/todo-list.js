@@ -19,30 +19,32 @@ class TodoList extends Component {
 	deleteListItem(index){
 		
 		var newList = this.state.todoList.filter((item,i) => {
-			
 			return i !== index;
 		})
 		
 		this.setState({todoList:newList});
 	}
 
-	 handleTaskInput(e){
+	
+
+	handleTaskInput(e){
 		this.setState ({
  		todoTask:e.target.value
  		})
 	}
 
 	handleAddTask(){
-//debugger		
+		
 		var newTaskArray = this.state.todoList//.push(this.state.todoTask)
-newTaskArray.push(this.state.todoTask)
+			newTaskArray.push(this.state.todoTask)
 		this.setState ({
- 			todoList:newTaskArray
+ 			todoList:newTaskArray,
+ 			todoTask:""
  		})
 	}
   
   render() {
-    console.log("todoList", this.state.todoList)
+   
   	const todoListItems = this.state.todoList.map((item , index) => {
   		return  <Task key={index} data={index} label={item} handleDelete={this.deleteListItem.bind(this)}></Task>
   	})

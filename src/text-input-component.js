@@ -21,7 +21,7 @@ class TextInput extends Component {
   	
     return (
     	
-      <input type="text" name="todoText" onChange = {(e) => this.props.handleTaskInput(e)} />
+      <input type="text" value ={this.props.todoTask} name="todoText" onChange = {(e) => this.props.handleTaskInput(e)} />
 
     
     );
